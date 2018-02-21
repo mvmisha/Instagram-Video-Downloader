@@ -11,18 +11,15 @@
     <form>
         <input type="text" id="link" name="link" placeholder="Paste your instagram link" required>
         <button type="button" id="link" onclick="descargar()" download>Download</button>
-        <a href="source.mp4" id="download" download hidden>Download video</a>
+        
+        <a id="download" download hidden></a>
 
     </form>
 
     <script type="application/javascript">
-        var link
-
         function descargar() {
-            link = document.getElementById('link').value
+            var link = document.getElementById('link').value
             link = link + '/?__a=1'
-
-            var d = new Date();
             var xhttp;
             var urlapi;
             urlapi = link
@@ -31,17 +28,14 @@
                 if (this.readyState == 4 && this.status == 200) {
                     var objeto = JSON.parse(xhttp.responseText);
                     link = objeto.graphql.shortcode_media.video_url
-                    console.log(link)
-                    
+
                     document.getElementById('download').setAttribute('href', link)
                     document.getElementById('download').click();
-
                 }
             };
             xhttp.open("GET", urlapi, true);
             xhttp.send();
         }
-
     </script>
 </body>
 
